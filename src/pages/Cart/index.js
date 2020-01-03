@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   Container,
   CartContainer,
@@ -15,9 +16,11 @@ import {
   CartPrice,
   CartDeleteButton,
   CartAmountView,
+  CartAmountCount,
   CartAmount,
   CartTotal,
   TotalView,
+  TotalSufixText,
   TotalText,
   FinishButton,
   FinishButtonText,
@@ -41,19 +44,34 @@ function Cart({ cart, total, removeFromCart, updateAmountRequest }) {
                 <CartTitle>{item.title}</CartTitle>
                 <CartPrice>{item.priceFormatted}</CartPrice>
               </CartInfo>
-              <CartDeleteButton>
+              <CartDeleteButton onPress={() => removeFromCart(item.id)}>
                 <Icon name="delete" size={24} color="#000" />
               </CartDeleteButton>
             </CartHeader>
             <CartAmountView>
-              <CartAmount value={String(item.amount)} editable={false} />
+              <CartAmountCount>
+                <TouchableOpacity>
+                  <Icon
+                    name="remove-circle-outline"
+                    color="#7159c1"
+                    size={24}
+                  />
+                </TouchableOpacity>
+                <CartAmount value={String(item.amount)} editable={false} />
+                <TouchableOpacity>
+                  <Icon name="add-circle-outline" color="#7159c1" size={24} />
+                </TouchableOpacity>
+              </CartAmountCount>
               <CartTotal>{item.subtotal}</CartTotal>
             </CartAmountView>
           </CartItem>
         )}
       />
       <TotalView>
-        <TotalText>{total}</TotalText>
+        <TotalText>
+          <TotalSufixText>TOTAL</TotalSufixText>
+          {total}
+        </TotalText>
         <FinishButton>
           <FinishButtonText>FINALIZAR PEDIDO</FinishButtonText>
         </FinishButton>

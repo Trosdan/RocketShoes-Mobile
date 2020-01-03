@@ -13,6 +13,8 @@ export const CartContainer = styled.FlatList`
 export const CartItem = styled.View`
   margin-top: 6px;
   margin-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   background: #fff;
   border: 1px solid #dddddd;
   border-radius: 6px;
@@ -20,6 +22,8 @@ export const CartItem = styled.View`
 
 export const CartHeader = styled.View`
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const CartImage = styled.Image`
@@ -41,26 +45,29 @@ export const CartPrice = styled.Text`
   font-weight: bold;
 `;
 
-export const CartDeleteButton = styled(RectButton)`
-  justify-content: center;
-  align-items: center;
-`;
+export const CartDeleteButton = styled(RectButton)``;
 
 export const CartAmountView = styled.View`
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background: #eeeeee;
   flex-direction: row;
 `;
 
+export const CartAmountCount = styled.View`
+  align-items: center;
+  flex-direction: row;
+`;
+
 export const CartAmount = styled.TextInput`
-  margin: 8px 0 8px 0;
+  margin: 8px 5px 8px 5px;
   width: 50px;
   height: 35px;
   background: #fff;
   border: 1px solid #dddddd;
   border-radius: 6px;
-  margin-left: 36px;
+  color: black;
+  text-align: center;
 `;
 
 export const CartTotal = styled.Text`
@@ -72,7 +79,15 @@ export const TotalView = styled.View`
   justify-content: center;
   background: #fff;
   border: 1px solid #dddddd;
-  border-radius: 6px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+`;
+
+export const TotalSufixText = styled.Text`
+  font-size: 18;
+  color: #999;
+  font-weight: bold;
+  margin-right: 5px;
 `;
 
 export const TotalText = styled.Text`
