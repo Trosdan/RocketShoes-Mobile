@@ -49,7 +49,7 @@ export default function Home() {
 
   useEffect(() => {
     getProducts();
-  });
+  }, []);
 
   function handleAddProduct(id) {
     dispatch(CartActions.addToCartRequest(id));

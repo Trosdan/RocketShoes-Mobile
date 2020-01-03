@@ -5,8 +5,13 @@ import logo from '../../assets/images/logo.png';
 export const Container = styled.View`
   flex-direction: row;
   padding: 20px;
-  justify-content: space-between;
   background: #141419;
+  align-items: center;
+`;
+
+export const Back = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Logo = styled.Image.attrs({
@@ -15,6 +20,8 @@ export const Logo = styled.Image.attrs({
 })`
   width: 185px;
   height: 24px;
+  margin-left: 10px;
+  margin-right: auto;
 `;
 
 export const Cart = styled.TouchableOpacity`
