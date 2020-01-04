@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LottieView from 'lottie-react-native';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
@@ -26,11 +28,16 @@ import {
 } from './styles';
 
 import { numberToBRL } from '../../utils/format';
+import Modal from '../../components/Modal';
+import checkoutData from '../../assets/anim/checkout.json';
 
 import * as CartActions from '../../store/module/Cart/actions';
 
 export default function Cart() {
   const dispatch = useDispatch();
+  const lottieRef = useRef(null);
+
+  const [showModal, setShowModal] = useState(false);
 
   const cart = useSelector(state =>
     state.cart.map(product => ({
@@ -47,8 +54,38 @@ export default function Cart() {
     )
   );
 
+  function handlerOpen() {
+    if (cart.length === 0) {
+      Alert.alert(
+        'Carrinho vazio',
+        'Adicionar produtos no carrinho para finalizar a compra'
+      );
+    } else {
+      setShowModal(true);
+    }
+  }
+
+  function handlerClose() {
+    setShowModal(false);
+    dispatch(CartActions.reset());
+  }
+
   return (
     <Container>
+      <Modal
+        show={showModal}
+        title="COMPRA FINALIZADA"
+        handlerClose={() => handlerClose()}
+      >
+        <LottieView
+          ref={lottieRef}
+          source={checkoutData}
+          autoPlay
+          loop={false}
+          resizeMode="cover"
+          style={{ width: 100, height: 100, flex: 1, alignSelf: 'center' }}
+        />
+      </Modal>
       <CartContainer
         data={cart}
         keyExtractor={item => String(item.id)}
@@ -102,7 +139,7 @@ export default function Cart() {
           <TotalSufixText>TOTAL</TotalSufixText>
           {total}
         </TotalText>
-        <FinishButton>
+        <FinishButton onPress={() => handlerOpen()}>
           <FinishButtonText>FINALIZAR PEDIDO</FinishButtonText>
         </FinishButton>
       </TotalView>

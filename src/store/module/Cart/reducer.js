@@ -24,6 +24,9 @@ export default function cart(state = [], action) {
         }
       });
     }
+    case '@cart/RESET': {
+      return [];
+    }
     default:
       return state;
   }
