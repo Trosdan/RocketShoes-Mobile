@@ -100,7 +100,7 @@ export default function Cart() {
               <CartDeleteButton
                 onPress={() => dispatch(CartActions.removeFromCart(item.id))}
               >
-                <Icon name="delete" size={24} color="#000" />
+                <Icon name="delete" size={24} color="#7159c1" />
               </CartDeleteButton>
             </CartHeader>
             <CartAmountView>
